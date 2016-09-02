@@ -31,12 +31,12 @@ Some useful tips to help you get started:
 Profile, optimize, measure... and then lather, rinse, and repeat. Good luck!
 
 Here are the optimizations made to the index.html and web site:
-1.) On the Link tag for the print.css stylesheet, I added the media="print" argument so that the page  knows to not wait for loading the print.css.
-2.) Added the async argument to the jscript tag for loading the google analytics.js.  There is no need to wait on this for the page to load.
-3.) The link tag was changed that loads the google font to now load the webfont java script instead.  The font gets loaded asynchronously from a script tag at the bottom of the page.  This improves the loading of the font.
-4.) The style.css file got removed and moved all the css code inline on the HTML page.
-5.) The the Java script ( perfmaters.js) got minified by using grunt ( uglify).
-6.) The Html file also got minified by using grunt (htmlmin).  THe source is now in a src directory.
+1. On the Link tag for the print.css stylesheet, I added the media="print" argument so that the page  knows to not wait for loading the print.css.
+1. Added the async argument to the jscript tag for loading the google analytics.js.  There is no need to wait on this for the page to load.
+1. The link tag was changed that loads the google font to now load the webfont java script instead.  The font gets loaded asynchronously from a script tag at the bottom of the page.  This improves the loading of the font.
+1. The style.css file got removed and moved all the css code inline on the HTML page.
+1. The the Java script ( perfmaters.js) got minified by using grunt ( uglify).
+1. The Html file also got minified by using grunt (htmlmin).  THe source is now in a src directory.
 
 ####Part 2: Optimize Frames per Second in pizza.html
 
