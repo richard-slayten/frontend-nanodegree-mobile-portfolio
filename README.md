@@ -30,13 +30,14 @@ Some useful tips to help you get started:
 
 Profile, optimize, measure... and then lather, rinse, and repeat. Good luck!
 
-Here are the optimizations made to the index.html and web site:
+Here are the optimizations made to the index.html and web site.  I received a pagespeed score of 92 for mobile and 91 for desktop:
 * On the Link tag for the print.css stylesheet, I added the media="print" argument so that the page  knows to not wait for loading the print.css.
 * Added the async argument to the jscript tag for loading the google analytics.js.  There is no need to wait on this for the page to load.
 * The link tag was changed that loads the google font to now load the webfont java script instead.  The font gets loaded asynchronously from a script tag at the bottom of the page.  This improves the loading of the font.
 * The style.css file got removed and moved all the css code inline on the HTML page.
-* The the Java script ( perfmaters.js) got minified by using grunt ( uglify).
-* The Html file also got minified by using grunt (htmlmin).  THe source is now in a src directory.
+* The the Java script ( perfmaters.js) got minified by using grunt ( uglify).  it is now referenced as perfmatters.min.js in js folder.
+* The Html file (index.html) also got minified by using grunt (htmlmin).  The source is now in a src directory.
+* Resized the pizzeria.jpg image with ImageMagick to create a smaller image.
 
 ####Part 2: Optimize Frames per Second in pizza.html
 
