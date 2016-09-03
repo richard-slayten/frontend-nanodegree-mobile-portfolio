@@ -45,6 +45,22 @@ To optimize views/pizza.html, you will need to modify views/js/main.js until you
 
 You might find the FPS Counter/HUD Display useful in Chrome developer tools described here: [Chrome Dev Tools tips-and-tricks](https://developer.chrome.com/devtools/docs/tips-and-tricks).
 
+Here are the optimizations made to the views/js/main.js file to render with a consistent frame-rte at 60 fps when scrolling:
+* Change the scroll event listener to call the anicateCheck function that uses requestAutomationFrame.  The running update variable is also used in this setup to track when to run the updatePositions again.
+* Changed the 200 pizza creation to a max of 5 cols and 5 rows. The variables will adjust for the different size screens and evenly space the pizzas.  This creates a max of 25 pizzas.
+* Changed pizza image to a smaller size file using ImageMagick.
+* Change the sytle of basicleft to just left on pizzas
+* Created a moverItems array variable to hold all the pizzas and a length variable to store the number of pizzas and used the function getElementsByClassName to get them
+* Added css to mover class 
+  * will-change: transform; 
+  * transform: translateZ(0);
+  * backface-visibility: hidden; 
+* refactored updatePosistions
+  * Moved all calculations outside of the for loop
+  * Changed the repositioning to a transform style instead of a left in the for loop.
+  * Created a separate variable to hold the 5 phase values and assigned it in it's own for loop.
+  * The wing adjustment is added to the calculation to account for the bigger/smaller widths.
+
 Here are the optimizations made to the views/js/main.js file to improve the resize of the pizzas to less than 5ms: ( I got about 2 ms)
 * Moved the functions changeSliderLabel and changePizzaSizes out of the resizePizzas function.
 * Moved the sizeSwitcher out into its own function.
