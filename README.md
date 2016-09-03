@@ -45,6 +45,18 @@ To optimize views/pizza.html, you will need to modify views/js/main.js until you
 
 You might find the FPS Counter/HUD Display useful in Chrome developer tools described here: [Chrome Dev Tools tips-and-tricks](https://developer.chrome.com/devtools/docs/tips-and-tricks).
 
+Here are the optimizations made to the views/js/main.js file to improve the resize of the pizzas to less than 5ms: ( I got about 2 ms)
+* Moved the functions changeSliderLabel and changePizzaSizes out of the resizePizzas function.
+* Moved the sizeSwitcher out into its own function.
+* Changed the querySelector function to use getElementById instead for functions changeSliderLabel and determineDx.
+* Refactored changePizzaSizes for loop
+- Created an array for the items that has a class of randomPizzaContainer and put it outside of the function as a global variable
+- Used the function getElementsByClassName instead of querySelectorAll.
+- Put the call to determineDX outside the loop and only need to call it once (first object in array) since all the objects should be the same size.
+- Calculated the new width outside the loop into a new variable as a global variable.
+- Created an arraylength variable to hold the number of items in the array for the loop.
+
+
 ### Optimization Tips and Tricks
 * [Optimizing Performance](https://developers.google.com/web/fundamentals/performance/ "web performance")
 * [Analyzing the Critical Rendering Path](https://developers.google.com/web/fundamentals/performance/critical-rendering-path/analyzing-crp.html "analyzing crp")
