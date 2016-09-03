@@ -50,11 +50,11 @@ Here are the optimizations made to the views/js/main.js file to improve the resi
 * Moved the sizeSwitcher out into its own function.
 * Changed the querySelector function to use getElementById instead for functions changeSliderLabel and determineDx.
 * Refactored changePizzaSizes for loop
-1. Created an array for the items that has a class of randomPizzaContainer and put it outside of the function as a global variable
-1. Used the function getElementsByClassName instead of querySelectorAll.
-1. Put the call to determineDX outside the loop and only need to call it once (first object in array) since all the objects should be the same size.
-1. Calculated the new width outside the loop into a new variable as a global variable.
-1. Created an arraylength variable to hold the number of items in the array for the loop.
+  1. Created an array for the items that has a class of randomPizzaContainer and put it outside of the function as a global variable
+  1. Used the function getElementsByClassName instead of querySelectorAll.
+  1. Put the call to determineDX outside the loop and only need to call it once (first object in array) since all the objects should be the same size.
+  1. Calculated the new width outside the loop into a new variable as a global variable.
+  1. Created an arraylength variable to hold the number of items in the array for the loop.
 
 
 ### Optimization Tips and Tricks
