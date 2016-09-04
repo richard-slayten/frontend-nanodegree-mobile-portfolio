@@ -550,30 +550,35 @@ function animateCheck() {
   window.addEventListener('scroll', animateCheck, false);
 
 
+var maxcols = 6; // limit the columns up to 5
+var maxrows = 6;  // limit rows up to 5
+var cols = 6; 
+var rows = 6;  
+var maxs = 256; // the pixel size for each width of a column
+var maxs2 = 256;  // the pixel size for each heigth of a row
+var s = 256; // the pixel size for each width of a column
+var s2 = 256;  // the pixel size for each heigth of a row
 
 // Generates the sliding pizzas when the page loads.
 document.addEventListener('DOMContentLoaded', function() {
-  var cols = 5; // limit the columns up to 5
-  var rows = 5;  // limit rows up to 5
-  var s = 256; // the pixel size for each width of a column
-  var s2 = 256;  // the pixel size for each heigth of a row
   var screenHeight = window.innerHeight ;
   var screenWidth= window.innerWidth ;
+  s = maxs; // the pixel size for each width of a column
+  s2 = maxs2;  // the pixel size for each heigth of a row
   // changing the width and wing of the column. adjust for max columns 
-  if(screenWidth/rows > s) {
-    s = screenWidth/rows;
-    wingAdjstment = s/2;
+  if(screenWidth/maxcols > maxs) {
+    s = screenWidth/maxcols;
   }
+  wingAdjstment = s/2;
   // changing the height of the row.  adjust for max  rows
-  if(screenHeight/rows > s2) {
-    s2 = screenHeight/rows;
+  if(screenHeight/maxrows > maxs2) {
+    s2 = screenHeight/maxrows;
   }
 
   cols = Math.ceil(screenWidth / s);
   rows = Math.ceil(screenHeight / s2);
-
   // only create enough pizzas to cover the screen and or max cols and rows.
-  for (var i = 0; i < cols * rows; i++) {
+  for (var i = 0; i < maxcols * maxrows; i++) {
     var elem = document.createElement('img');
     elem.className = 'mover';
     elem.src = "images/pizza2.png";
@@ -584,9 +589,36 @@ document.addEventListener('DOMContentLoaded', function() {
     elem.style.top = (Math.floor(i / cols) * s2) + 'px';
     document.getElementById("movingPizzas1").appendChild(elem);
   }
-
   moverItems = document.getElementsByClassName('mover');
   moverItemsLength = moverItems.length;
   //used requestAnimationFrame on updatePositions();
-  requestAnimationFrame(updatePositions);
-});
+  animateCheck();
+} );
+
+// when a resize of window happens, the backgroud pizzas should change change.
+function domload() {
+
+  var screenHeight = window.innerHeight ;
+  var screenWidth= window.innerWidth ;
+  s = maxs; // the pixel size for each width of a column
+  s2 = maxs2;  // the pixel size for each heigth of a row
+  // changing the width and wing of the column. adjust for max columns 
+  if(screenWidth/maxcols > maxs) {
+    s = screenWidth/maxcols;
+  }
+  wingAdjstment = s/2;
+  // changing the height of the row.  adjust for max  rows
+  if(screenHeight/maxrows > maxs2) {
+    s2 = screenHeight/maxrows;
+  }
+
+  cols = Math.ceil(screenWidth / s);
+  rows = Math.ceil(screenHeight / s2);
+
+  // only create enough pizzas to cover the screen and or max cols and rows.
+  for (var i = 0; i < maxcols * maxrows; i++) {
+    moverItems[i].style.left = (i % cols) * s + 'px';
+    moverItems[i].style.top = (Math.floor(i / cols) * s2) + 'px';
+  }
+  animateCheck();
+}
