@@ -51,7 +51,7 @@ Here are the optimizations made to the views/js/main.js file to render with a co
 * Changed pizza image to a smaller size file using ImageMagick.
 * Change the sytle of basicleft to just left on pizzas
 * Created a moverItems array variable to hold all the pizzas and a length variable to store the number of pizzas and used the function getElementsByClassName to get them
-* Created a resize function to reset the background pizzas when the screen is resized.  This had nothing to do with the fps, but was fun to add to the web page.
+* Created a resize function (domload) to reset the background pizzas when the screen is resized.  This had nothing to do with the fps, but was fun to add to the web page.
 * Added css to mover class 
   * will-change: transform; 
   * transform: translateZ(0);
