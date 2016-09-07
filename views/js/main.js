@@ -378,8 +378,10 @@ var pizzaElementGenerator = function(i) {
   pizzaContainer.id = "pizza" + i;                // gives each pizza element a unique id
   pizzaImageContainer.style.width="35%";
 
-  pizzaImage.src = "images/pizza.png";
+  // chnaged to a smaller pizza image and set the width to 100%
+  pizzaImage.src = "images/pizza_md_min.png";
   pizzaImage.classList.add("img-responsive");
+  pizzaImage.style.width="100%";
   pizzaImageContainer.appendChild(pizzaImage);
   pizzaContainer.appendChild(pizzaImageContainer);
 
@@ -404,14 +406,18 @@ var pizzaElementGenerator = function(i) {
   function changeSliderLabel(size) {
     switch(size) {
       // changed funcation call to getElementById instead of using querySelector 
+      // added the update to newPizzaContSize to adjst teh size of new container
       case "1":
         document.getElementById("pizzaSize").innerHTML = "Small";
+        newPizzaContSize = 0.25 ;
         return;
       case "2":
         document.getElementById("pizzaSize").innerHTML = "Medium";
+        newPizzaContSize = 0.3333 ;
         return;
       case "3":
         document.getElementById("pizzaSize").innerHTML = "Large";
+        newPizzaContSize = 0.5 ;
         return;
       default:
         console.log("bug in changeSliderLabel");
@@ -452,9 +458,11 @@ var pizzaElementGenerator = function(i) {
   // moved the dx assignment outside the loop.  only need to do this once (for first item) since 
   // set the width outside the loop so that it only needs to happen once.
   // I combined them both together into one statement.
-  var newwidth = (pizza_container_array[0].offsetWidth + determineDx(pizza_container_array[0], size)) + 'px';
+  // var newwidth = (pizza_container_array[0].offsetWidth + determineDx(pizza_container_array[0], size)) + 'px';
+  // in the end I removed the determineDXand size switcher  function and figured the size off the new change.
+  var newwidth = newPizzaContSize * windowWidth + 'px';
   for (var i = 0; i < pcaLength; i++) {
-      pizza_container_array[i].style.width = newwidth;
+      pizza_container_array[i].style.width = newwidth ;
     }
   }
 
@@ -475,8 +483,8 @@ var resizePizzas = function(size) {
 window.performance.mark("mark_start_generating"); // collect timing data
 
 // This for-loop actually creates and appends all of the pizzas when the page loads
+var pizzasDiv = document.getElementById("randomPizzas");
 for (var i = 2; i < 100; i++) {
-  var pizzasDiv = document.getElementById("randomPizzas");
   pizzasDiv.appendChild(pizzaElementGenerator(i));
 }
 // created the pizza_container_array to get the class items only once and used the 
@@ -484,6 +492,11 @@ for (var i = 2; i < 100; i++) {
 var pizza_container_array = document.getElementsByClassName('randomPizzaContainer');
 // created a variable to hold the length of the array items
 var pcaLength = pizza_container_array.length;
+
+//variable to hold the size of the new pizza container to switch to.
+var newPizzaContSize = .3333 ;
+//window width gets the width of the window to determine the pixels of a pizza container
+var windowWidth = document.getElementById("randomPizzas").offsetWidth;
 
 // User Timing API again. These measurements tell you how long it took to generate the initial pizzas
 window.performance.mark("mark_end_generating");
@@ -512,6 +525,7 @@ var moverItems;
 var moverItemsLength;
 var runningupdate = false;
 var wingAdjstment = 100; // sets the variable that determines the moving span of the background pizzas
+var phaseHold = [];
 
 // Moves the sliding background pizzas based on scroll position
 function updatePositions() {
@@ -519,9 +533,9 @@ function updatePositions() {
   runningupdate = false;
   window.performance.mark("mark_start_frame");
   var scrollpx = document.body.scrollTop/1250;
-  var phaseHold = [];
+  
   for (var i = 0; i < 5; i++) {
-     phaseHold[i] = Math.sin((scrollpx + i))  * wingAdjstment + 'px';
+     phaseHold[i] = Math.sin(scrollpx + i)  * wingAdjstment + 'px';
    }
   for (var i = 0; i < moverItemsLength ; i++) { 
      moverItems[i].style.transform = 'translateX(' + ( phaseHold[i%5]) + ')';
@@ -581,7 +595,7 @@ document.addEventListener('DOMContentLoaded', function() {
   for (var i = 0; i < maxcols * maxrows; i++) {
     var elem = document.createElement('img');
     elem.className = 'mover';
-    elem.src = "images/pizza2.png";
+    elem.src = "images/pizza_bk_min.png";
     elem.style.height = "100px";
     elem.style.width = "73.333px";
     //  change from basicleft style
@@ -597,6 +611,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // when a resize of window happens, the backgroud pizzas should change change.
 function domload() {
+
+  // reset the window size for determining the pizza containers sizes.
+  WindowWidth = document.getElementById("randomPizzas").offsetWidth;
 
   var screenHeight = window.innerHeight ;
   var screenWidth= window.innerWidth ;

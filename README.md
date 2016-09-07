@@ -72,7 +72,12 @@ Here are the optimizations made to the views/js/main.js file to improve the resi
   * Put the call to determineDX outside the loop and only need to call it once (first object in array) since all the objects should be the same size.
   * Calculated the new width outside the loop into a new variable as a global variable.
   * Created an arraylength variable to hold the number of items in the array for the loop.
-
+* Decreased size of image by resizing the pizza image to 136x176 px ( medium). The width had to be set to 100% to keep the same original pizza size.  Used grunt to minify the image.  
+* Refactored the changePizzaSizes for loop even more a second time
+  * got rid of the determineDx and sizeSwitcher functions.
+  * added new variable to keep track of the window width and the new pizza container size.
+  * updated the variables. window width in the main code and container size in the changeSliderLabel function.
+  * calculated teh new width from those 2 new variables.
 
 ### Optimization Tips and Tricks
 * [Optimizing Performance](https://developers.google.com/web/fundamentals/performance/ "web performance")
