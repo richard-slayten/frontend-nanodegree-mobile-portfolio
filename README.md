@@ -77,7 +77,7 @@ Here are the optimizations made to the views/js/main.js file to improve the resi
   * got rid of the determineDx and sizeSwitcher functions.
   * added new variable to keep track of the window width and the new pizza container size.
   * updated the variables. window width in the main code and container size in the changeSliderLabel function.  Calculated the new width from those 2 new variables.
-  * added a randomn feature for the back ground pizzas.  used a min cols/rows variables and set the phase to not have the same cycle as the number of columns ( -1).  This creates the random effect so the the rows wont ever sync together.
+  * added a random feature for the back ground pizzas.  used a min cols/rows variables and set the phase to not have the same cycle as the number of columns ( -1).  This creates the random effect so the the rows wont ever sync together.
 
 ### Optimization Tips and Tricks
 * [Optimizing Performance](https://developers.google.com/web/fundamentals/performance/ "web performance")
