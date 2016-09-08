@@ -534,11 +534,12 @@ function updatePositions() {
   window.performance.mark("mark_start_frame");
   var scrollpx = document.body.scrollTop/1250;
   
-  for (var i = 0; i < 5; i++) {
+  for (var i = 0; i < cols; i++) {
      phaseHold[i] = Math.sin(scrollpx + i)  * wingAdjstment + 'px';
    }
+   // used cols -1 so that the pizzas are random and not synced on the page.
   for (var i = 0; i < moverItemsLength ; i++) { 
-     moverItems[i].style.transform = 'translateX(' + ( phaseHold[i%5]) + ')';
+     moverItems[i].style.transform = 'translateX(' + ( phaseHold[i%(cols-1)]) + ')';
   }
   // User Timing API to the rescue again. Seriously, it's worth learning.
   // Super easy to create custom metrics.
@@ -564,8 +565,10 @@ function animateCheck() {
   window.addEventListener('scroll', animateCheck, false);
 
 
-var maxcols = 6; // limit the columns up to 5
-var maxrows = 6;  // limit rows up to 5
+var maxcols = 6; // limit the columns 
+var maxrows = 6;  // limit rows 
+var mincols = 3; // limit the columns 
+var minrows = 3;  // limit rows 
 var cols = 6; 
 var rows = 6;  
 var maxs = 256; // the pixel size for each width of a column
@@ -590,7 +593,9 @@ document.addEventListener('DOMContentLoaded', function() {
   }
 
   cols = Math.ceil(screenWidth / s);
+  if (cols < mincols) { cols = mincols; }  
   rows = Math.ceil(screenHeight / s2);
+  if (rows < minrows) { rows = mincols; }
   // only create enough pizzas to cover the screen and or max cols and rows.
   for (var i = 0; i < maxcols * maxrows; i++) {
     var elem = document.createElement('img');
@@ -630,7 +635,9 @@ function domload() {
   }
 
   cols = Math.ceil(screenWidth / s);
+  if (cols < mincols) { cols = mincols; }  
   rows = Math.ceil(screenHeight / s2);
+  if (rows < minrows) { rows = mincols; }
 
   // only create enough pizzas to cover the screen and or max cols and rows.
   for (var i = 0; i < maxcols * maxrows; i++) {
